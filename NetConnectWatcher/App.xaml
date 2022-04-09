@@ -1,0 +1,9 @@
+﻿<Application x:Class="NetConnectWatcher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:converter="clr-namespace:NetConnectWatcher.Convertor"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <converter:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </Application.Resources>
+</Application>
