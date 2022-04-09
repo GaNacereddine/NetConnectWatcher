@@ -1,3 +1,3 @@
 # NetConnectWatcher
 
-a tcp udp connections monitoring app
+a TCP UDP connections monitoring app
