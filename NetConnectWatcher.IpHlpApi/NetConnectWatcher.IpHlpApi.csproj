@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPHlpAPI32Wrapper.cs" />
-    <Compile Include="Models\ConnectionType.cs" />
+    <Compile Include="Enums\ConnectionType.cs" />
+    <Compile Include="Abstractions\IDeepCopy.cs" />
     <Compile Include="Models\TCPStats.cs" />
     <Compile Include="Models\UDPStats.cs" />
     <Compile Include="Types\IpHlpApiException.cs" />

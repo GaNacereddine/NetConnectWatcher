@@ -1,11 +1,9 @@
-﻿using System.Net;
+﻿using NetConnectWatcher.IpHlpApi.Abstraction;
+using NetConnectWatcher.IpHlpApi.Enum;
+using System.Net;
 
 namespace NetConnectWatcher.IpHlpApi.Model
 {
-    public interface IDeepCopy<T>
-    {
-        T DeepCopy();
-    }
 
     public class ProcessConnectionModel : IDeepCopy<ProcessConnectionModel>
     {

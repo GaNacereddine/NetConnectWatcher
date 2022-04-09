@@ -1,4 +1,5 @@
-﻿using NetConnectWatcher.IpHlpApi.Model;
+﻿using NetConnectWatcher.IpHlpApi.Enum;
+using NetConnectWatcher.IpHlpApi.Model;
 using NetConnectWatcher.IpHlpApi.NativeImports;
 using NetConnectWatcher.IpHlpApi.Types;
 using NetConnectWatcher.IpHlpApi.Utilities;

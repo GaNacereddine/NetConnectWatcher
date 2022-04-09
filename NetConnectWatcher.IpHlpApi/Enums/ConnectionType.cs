@@ -1,4 +1,4 @@
-﻿namespace NetConnectWatcher.IpHlpApi.Model
+﻿namespace NetConnectWatcher.IpHlpApi.Enum
 {
     public enum ConnectionType
     {
