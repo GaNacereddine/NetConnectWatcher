@@ -94,20 +94,16 @@ namespace NetConnectWatcher.ViewModels
                     {
                         IPHlpAPI32Wrapper.FillConnections(connectionList);
 
-                        InvokeOnMainThread(() =>
+                        InvokeOnMainThreadSync(() =>
                         {
                             SetListsData(connectionList);
                         });
 
-                        Thread.Sleep(100);
-                    }
-                    catch (TaskCanceledException)
-                    { 
-                        // Nothing at this stage
+                        Thread.Sleep(100); // get data each 100 ms
                     }
                     catch (Exception ex)
                     {
-                        InvokeOnMainThread(() =>
+                        InvokeOnMainThreadSync(() =>
                         {
                             IsMonitoring = false;
                         });
@@ -133,7 +129,7 @@ namespace NetConnectWatcher.ViewModels
 
         private void SetListsData(List<ProcessConnectionModel> list)
         {
-            _internalConnectionList = list.ToList();
+            UpdateCollection(_internalConnectionList, list);
 
             UpdateFilteredConnectionListByPid(_selectedProcessId, list);
 
@@ -174,11 +170,11 @@ namespace NetConnectWatcher.ViewModels
             {
                 if (i < processListCount)
                 {
-                    observableCollection[i] = list[i];
+                    observableCollection[i] = list[i].DeepCopy();
                 }
                 else
                 {
-                    observableCollection.Add(list[i]);
+                    observableCollection.Add(list[i].DeepCopy());
                 }
             }
 
@@ -188,6 +184,28 @@ namespace NetConnectWatcher.ViewModels
                 {
                     observableCollection.RemoveAt(i);
                 }
+            }
+        }
+
+        private void UpdateCollection(List<ProcessConnectionModel> collection, List<ProcessConnectionModel> list)
+        {
+            var processListCount = collection.Count;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (i < processListCount)
+                {
+                    collection[i] = list[i].DeepCopy();
+                }
+                else
+                {
+                    collection.Add(list[i].DeepCopy());
+                }
+            }
+
+            if (collection.Count > list.Count)
+            {
+                collection.RemoveRange(list.Count - 1, collection.Count - list.Count);
             }
         }
 

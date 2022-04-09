@@ -7,10 +7,18 @@ namespace NetConnectWatcher.Binding
     {
         private readonly SynchronizationContext synchronizationContext = SynchronizationContext.Current;
 
-        protected void InvokeOnMainThread(Action action)
+        protected void InvokeOnMainThreadSync(Action action)
         {
             if (synchronizationContext != null && SynchronizationContext.Current != synchronizationContext)
                 synchronizationContext.Send(_ => action(), null);
+            else
+                action();
+        }
+
+        protected void InvokeOnMainThreadASync(Action action)
+        {
+            if (synchronizationContext != null && SynchronizationContext.Current != synchronizationContext)
+                synchronizationContext.Post(_ => action(), null);
             else
                 action();
         }

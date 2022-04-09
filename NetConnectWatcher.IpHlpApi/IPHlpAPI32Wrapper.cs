@@ -62,9 +62,7 @@ namespace NetConnectWatcher.IpHlpApi
 				OutDatagrams = UdpStats.dwOutDatagrams,
 			};
 		}
-
-		// DOCS
-		// https://docs.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedtcptable
+		
 		public static List<ProcessConnectionModel> GetTcpConnections()
 		{
 			byte[] buffer = GetTcpTableBuffer();
@@ -77,8 +75,6 @@ namespace NetConnectWatcher.IpHlpApi
 			return result;
 		}
 
-		// DOCS
-		// https://docs.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedudptable
 		public static List<ProcessConnectionModel> GetUdpConnections()
 		{
 			byte[] buffer = GetUdpTableBuffer();
@@ -191,6 +187,8 @@ namespace NetConnectWatcher.IpHlpApi
 			}
 		}
 
+		// DOCS
+		// https://docs.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedudptable
 		private static byte[] GetTcpTableBuffer()
 		{
 			byte[] buffer = new byte[1];
@@ -215,6 +213,8 @@ namespace NetConnectWatcher.IpHlpApi
 			return buffer;
 		}
 
+		// DOCS
+		// https://docs.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedtcptable
 		private static byte[] GetUdpTableBuffer()
 		{
 			byte[] buffer = new byte[1];

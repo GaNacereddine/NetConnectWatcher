@@ -2,8 +2,12 @@
 
 namespace NetConnectWatcher.IpHlpApi.Model
 {
+    public interface IDeepCopy<T>
+    {
+        T DeepCopy();
+    }
 
-    public class ProcessConnectionModel
+    public class ProcessConnectionModel : IDeepCopy<ProcessConnectionModel>
     {
         public string ProcessName { get; set; }
 
@@ -17,6 +21,15 @@ namespace NetConnectWatcher.IpHlpApi.Model
 
         public string RemoteAddress { get; set; }
 
+        public ProcessConnectionModel DeepCopy()
+        {
+            ProcessConnectionModel other = (ProcessConnectionModel)this.MemberwiseClone();
+            other.ProcessName = string.Copy(ProcessName);
+            other.State = string.Copy(State);
+            other.LocalAddress = string.Copy(LocalAddress);
+            other.RemoteAddress = string.Copy(RemoteAddress);
+            return other;
+        }
     }
 
 }
