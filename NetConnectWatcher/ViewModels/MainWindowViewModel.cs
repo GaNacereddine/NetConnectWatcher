@@ -36,6 +36,20 @@ namespace NetConnectWatcher.ViewModels
             set => SetProperty(ref _processList, value);
         }
 
+        private ProcessConnectionModel _selectedProcess;
+        public ProcessConnectionModel SelectedProcess
+        {
+            get => _selectedProcess;
+            set 
+            { 
+                SetProperty(ref _selectedProcess, value);
+                if (value != null)
+                {
+                    FilterConnectionsByPid(value.ProcessId);
+                }
+            }
+        }
+
         private ObservableCollection<ProcessConnectionModel> _filteredConnectionList = new ObservableCollection<ProcessConnectionModel>();
         public ObservableCollection<ProcessConnectionModel> FilteredConnectionList
         {
@@ -44,6 +58,16 @@ namespace NetConnectWatcher.ViewModels
         }
 
         private int _selectedProcessId = -1;
+
+        public int SelectedProcessId
+        {
+            get => _selectedProcessId;
+            set
+            {
+                SetProperty(ref _selectedProcessId, value);
+            }
+        }
+
 
         private bool _isMonitoring = false;
         public bool IsMonitoring
@@ -57,7 +81,10 @@ namespace NetConnectWatcher.ViewModels
 
         public void FilterConnectionsByPid(int processId)
         {
-            UpdateFilteredConnectionListByPid(processId, _internalConnectionList);
+            if (processId != _selectedProcessId)
+            {
+                UpdateFilteredConnectionListByPid(processId, _internalConnectionList);
+            }
         }
 
         private void StartMonitoringCommandExecute()
@@ -159,7 +186,7 @@ namespace NetConnectWatcher.ViewModels
                 UpdateObservableCollection(FilteredConnectionList, list);
             }
 
-            _selectedProcessId = processId;
+            SelectedProcessId = processId;
         }
 
         private void UpdateObservableCollection(ObservableCollection<ProcessConnectionModel> observableCollection, List<ProcessConnectionModel> list)

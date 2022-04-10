@@ -68,7 +68,7 @@
                        Margin="4"/>
             
             <TextBox Width="180"
-                     
+                     Text="{Binding SelectedProcessId, Mode=TwoWay}"
                      VerticalContentAlignment="Center"
                      TextChanged="TextBox_TextChanged"/>
 
@@ -78,7 +78,8 @@
 
         <ListView Grid.Column="0"
                   Grid.Row="1"
-                  ItemsSource="{Binding ProcessList}">
+                  ItemsSource="{Binding ProcessList}"
+                  SelectedValue="{Binding SelectedProcess}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessName}" Header="ProcessName"/>
